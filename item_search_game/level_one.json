@@ -1,0 +1,69 @@
+{
+    "objectives": [
+        "Ore", "Mining Equipment", "Spare Change"
+    ],
+    "starting location": [
+        "Smithy"
+    ],
+    "locations": {
+        "Smithy": {
+            "Storyline": [
+                "You are at work at the smithy when suddenly you realize that you need a little more ore to complete the order."
+            ],
+            "Type": [
+                "Lock"
+            ],
+            "Forge": [
+                "Ore",
+                "You were able to complete the order!",
+                "You need more ore before you can complete the order.",
+                "End"
+            ]
+        },
+        "Shop": {
+            "Storyline": [
+                "You walk into the shop. It is brimming with all sorts of goodies."
+            ],
+            "Type": [
+                "Lock/Unlock"
+            ],
+            "Shopkeeper": [
+                "Spare Change",
+                "Looking for mining equipment? Here you go!",
+                "Looking for mining equipment? You seem to be a little short on change",
+                "Mining Equipment"
+            ]
+        },
+        "Home": {
+            "Storyline": [
+                "Home Sweet Home."
+            ],
+            "Type": [
+                "Unlock"
+            ],
+            "Drawer": [
+                "You found spare change!",
+                "Spare Change"
+            ]
+        },
+        "Mine": {
+            "Storyline": [
+                "As you approach the mine, you see many workers hard at work, collecting ore. There is also a foreman nearby."
+            ],
+            "Type": [
+                "Lock/Unlock"
+            ],
+            "Foreman": [
+                "Mining Equipment",
+                "Looks good, be careful!",
+                "I am sorry, but we are short on mining equipment. You will have to buy some."
+            ],
+            "Ore": [
+                "Mining Equipment",
+                "You collected the ore!",
+                "The ore is visible, but with your current equipment, you cannot collect it. Perhaps you could ask the foreman for some.",
+                "Ore"
+            ]
+        }
+    }
+}
