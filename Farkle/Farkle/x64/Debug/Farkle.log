@@ -1,0 +1,3 @@
+﻿  Farkle.cpp
+C:\Users\Standard\Desktop\C++\Farkle\Farkle\Farkle.cpp(156,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Farkle.vcxproj -> C:\Users\Standard\Desktop\C++\Farkle\x64\Debug\Farkle.exe
