@@ -1,0 +1,17 @@
+﻿  glDemo.cpp
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\glDemo.cpp(171,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\glDemo.cpp(172,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\glDemo.cpp(176,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\glDemo.cpp(177,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  ground.cpp
+  Lander.cpp
+  point.cpp
+  Star.cpp
+  uiDraw.cpp
+  uiInteract.cpp
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\uiInteract.cpp(279,68): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\uiInteract.cpp(279,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\uiInteract.cpp(291,60): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\uiInteract.cpp(291,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  Lab03.vcxproj -> C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\x64\Debug\Lab03.exe

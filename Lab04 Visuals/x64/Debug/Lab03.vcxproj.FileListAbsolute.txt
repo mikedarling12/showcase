@@ -1,0 +1,3 @@
+C:\Users\Standard\Desktop\Encapsulation Design\Lab03\x64\Debug\Lab03.exe
+C:\Users\Standard\Desktop\Encapsulation Design\Lab05 Visuals\x64\Debug\Lab03.exe
+C:\Users\Standard\Desktop\Encapsulation Design\Lab04 Visuals\x64\Debug\Lab03.exe
