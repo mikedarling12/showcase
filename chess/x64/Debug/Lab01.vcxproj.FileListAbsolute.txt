@@ -1,0 +1,4 @@
+C:\Users\jamesnh\OneDrive\OneDrive - BYU-Idaho\231\Site\Notes\Lab01\x64\Debug\Lab01.exe
+C:\Users\jamesnh\OneDrive\OneDrive - BYU-Idaho\231\Site\Notes\Lab01\x64\Debug\Lab01.pdb
+C:\Users\Standard\Desktop\Spring-23\Inheritance Design\W01 - Chess Redesign +1\x64\Debug\Lab01.exe
+C:\Users\Standard\Desktop\Spring-23\Inheritance Design\W06 - Chess Done\x64\Debug\Lab01.exe

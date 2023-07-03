@@ -1,0 +1,11 @@
+﻿  Board.cpp
+C:\Users\Standard\Desktop\Spring-23\Inheritance Design\W06 - Chess Done\Board.cpp(87,38): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Standard\Desktop\Spring-23\Inheritance Design\W06 - Chess Done\Board.cpp(232,28): warning C4553: '==': result of expression not used; did you intend '='?
+  chess.cpp
+  Piece.cpp
+  TestKing.cpp
+  TestPawn.cpp
+  uiDraw.cpp
+  uiInteract.cpp
+  Generating Code...
+  Lab01.vcxproj -> C:\Users\Standard\Desktop\Spring-23\Inheritance Design\W06 - Chess Done\x64\Debug\Lab01.exe
