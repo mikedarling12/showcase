@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+<style>
+.narrow
+{
+  margin-bottom: 0.5rem;
+}
+</style>
+<script>
+
+function EditRecord()
+{
+  document.getElementById("displayReturn").innerHTML = "";
+  var dataArr = [];
+  var row = document.getElementById("current-row").value;
+  var status = document.getElementById("status").value;
+  dataArr.push(status);
+  var notes_int = document.getElementById("notes-int").value;
+  dataArr.push(notes_int);
+  var notes_email = document.getElementById("notes-email").value;
+  dataArr.push(notes_email);
+  var client_first_name = document.getElementById("client-first-name").value;
+  dataArr.push(client_first_name);
+  var client_last_name = document.getElementById("client-last-name").value;
+  dataArr.push(client_last_name);
+  var patient_dob = document.getElementById("patient-dob").value;
+  dataArr.push(patient_dob);
+  var facility_name = document.getElementById("facility-name").value;
+  dataArr.push(facility_name);
+  var location_name = document.getElementById("location-name").value;
+  dataArr.push(location_name);
+  var date = document.getElementById("date").value;
+  dataArr.push(date);
+  var treatment_start_date = document.getElementById("treatment-start-date").value;
+  dataArr.push(treatment_start_date);
+  var old_client_new_insurance = document.getElementById("old-client-new-insurance").value;
+  dataArr.push(old_client_new_insurance);
+  var form_filler = document.getElementById("form-filler").value;
+  dataArr.push(form_filler);
+  var form_filler_email = document.getElementById("form-filler-email").value;
+  dataArr.push(form_filler_email);
+  var form_filler_phone = document.getElementById("form-filler-phone").value;
+  dataArr.push(form_filler_phone);
+  var second_insurance = document.getElementById("second-insurance").value;
+  dataArr.push(second_insurance);
+  var patient_phone = document.getElementById("patient-phone").value;
+  dataArr.push(patient_phone);
+  var client_ssn = document.getElementById("client-ssn").value;
+  dataArr.push(client_ssn);
+  var client_street = document.getElementById("client-street").value;
+  dataArr.push(client_street);
+  var client_street_2 = document.getElementById("client-street-2").value;
+  dataArr.push(client_street_2);
+  var client_city = document.getElementById("client-city").value;
+  dataArr.push(client_city);
+  var client_state = document.getElementById("client-state").value;
+  dataArr.push(client_state);
+  var client_zip = document.getElementById("client-zip").value;
+  dataArr.push(client_zip);
+  var insurance_provider = document.getElementById("insurance-provider").value;
+  dataArr.push(insurance_provider);
+  var insurance_provider_phone = document.getElementById("insurance-provider-phone").value;
+  dataArr.push(insurance_provider_phone);
+  var client_insurance_id = document.getElementById("client-insurance-id").value;
+  dataArr.push(client_insurance_id);
+  var policy_holder_first_name = document.getElementById("policy-holder-first-name").value;
+  dataArr.push(policy_holder_first_name);
+  var policy_holder_last_name = document.getElementById("policy-holder-last-name").value;
+  dataArr.push(policy_holder_last_name);
+  var policy_holder_dob = document.getElementById("policy-holder-dob").value;
+  dataArr.push(policy_holder_dob);
+  var policy_holder_client_relation = document.getElementById("policy-holder-client-relation").value;
+  dataArr.push(policy_holder_client_relation);
+  var policy_holder_street = document.getElementById("policy-holder-street").value;
+  dataArr.push(policy_holder_street);
+  var policy_holder_street_2 = document.getElementById("policy-holder-street-2").value;
+  dataArr.push(policy_holder_street_2);
+  var policy_holder_city = document.getElementById("policy-holder-city").value;
+  dataArr.push(policy_holder_city);
+  var policy_holder_state = document.getElementById("policy-holder-state").value;
+  dataArr.push(policy_holder_state);
+  var policy_holder_zip = document.getElementById("policy-holder-zip").value;
+  dataArr.push(policy_holder_zip);
+  var policy_benefits = document.getElementById("policy-benefits").value;
+  dataArr.push(policy_benefits);
+  var policy_benefit_type = document.getElementById("policy-benefit-type").value;
+  dataArr.push(policy_benefit_type);
+  google.script.run.EditRecord(row, dataArr);
+}
+</script>
+  </head>
+  <body>
+    <? var row = SpreadsheetApp.getUi().prompt("Select the row to be templated:").getResponseText(); ?>
+    <? var data = GetSheetValues(row); ?>
+    <form>
+      <div style="padding: 10px" >
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <input type="button" value="Update Record" onclick="EditRecord()" class="btn btn-primary" />
+      </div> 
+      </div>
+      <div class="form-row" >
+      <div class="form-group col-md-6 narrow" >
+      <label for="current-row" style="margin-bottom: 0rem" >Row</label>
+      <input type="text" id="current-row" class="form-control" value=<?= row ?> >
+      </div> 
+      </div>
+      <div class="form-row" >
+      <div class="form-group col-md-6 narrow" >
+      <label for="status" style="margin-bottom: 0rem" >Status</label>
+      <input type="text" id="status" class="form-control" value=<?= data[0] ?> >
+      </div> 
+      </div>
+      <div class="form-row" >
+      <div class="form-group col-md-6 narrow" >
+      <label for="notes-int" style="margin-bottom: 0rem" >Notes - Internal</label>
+      <input type="text" id="notes-int" class="form-control" value=<?= data[3] ?> >
+      </div> 
+      </div>
+      <div class="form-row" >
+      <div class="form-group col-md-6 narrow" >
+      <label for="notes-email" style="margin-bottom: 0rem" >Email Notes</label>
+      <input type="text" id="notes-email" class="form-control" value=<?= data[4] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-first-name" style="margin-bottom: 0rem" >Client First Name</label>
+      <input type="text" id="client-first-name" class="form-control" value=<?= data[5] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-last-name" style="margin-bottom: 0rem" >Client Last Name</label>
+      <input type="text" id="client-last-name" class="form-control" value=<?= data[6] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="patient-dob" style="margin-bottom: 0rem" >Patient DOB</label>
+      <input type="text" id="patient-dob" class="form-control" value=<?= data[7] ?> >
+      </div> 
+      </div>
+      <div class="form-row" style="display:none;">
+      <div class="form-group col-md-6 narrow" >
+      <label for="facility-name" style="margin-bottom: 0rem" >Facility Name</label>
+      <input type="text" id="facility-name" class="form-control" value=<?= data[8] ?> >
+      </div> 
+      </div>
+      <div class="form-row" >
+      <div class="form-group col-md-6 narrow" >
+      <label for="location-name" style="margin-bottom: 0rem" >Location Name</label>
+      <select id="location-name" class="form-control">
+        <? var facilities = GetLocations(row); ?>
+        <? for (let [key, value] of facilities) { if (key == data[8]) {?><option id="<?= value ?>" selected="selected"><?= key ?></option> <?} else {?><option id="<?= value ?>"><?= key ?></option> <?} }; ?>
+        <!--<? for (let [key, value] of facilities) { ?><option id="<?= value ?>"><?= key ?></option> <? }; ?>-->
+      </select>
+      <!--<input type="text" id="location-name" class="form-control" value=<?= data[2] ?> />-->
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="date" style="margin-bottom: 0rem" >Date</label>
+      <input type="text" id="date" class="form-control" value=<?= data[10] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="treatment-start-date" style="margin-bottom: 0rem" >Treatment Start Date</label>
+      <input type="text" id="treatment-start-date" class="form-control" value=<?= data[11] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="old-client-new-insurance" style="margin-bottom: 0rem" >Existing Client with New Insurance?</label>
+      <input type="text" id="old-client-new-insurance" class="form-control" value=<?= data[12] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="form-filler" style="margin-bottom: 0rem" >Who is completing the form?</label>
+      <input type="text" id="form-filler" class="form-control" value=<?= data[13] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="form-filler-email" style="margin-bottom: 0rem" >Email of Person Completing the Form</label>
+      <input type="text" id="form-filler-email" class="form-control" value=<?= data[14] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="form-filler-phone" style="margin-bottom: 0rem" >Phone # of Person Completing the Form</label>
+      <input type="text" id="form-filler-phone" class="form-control" value=<?= data[15] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="second-insurance" style="margin-bottom: 0rem" >Secondary Insurance or additional notes</label>
+      <input type="text" id="second-insurance" class="form-control" value=<?= data[16] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="patient-phone" style="margin-bottom: 0rem" >Patient Phone Number</label>
+      <input type="text" id="patient-phone" class="form-control" value=<?= data[17] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-ssn" style="margin-bottom: 0rem" >Client Last 4 of SSN</label>
+      <input type="text" id="client-ssn" class="form-control" value=<?= data[18] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-street" style="margin-bottom: 0rem" >Client Street Address</label>
+      <input type="text" id="client-street" class="form-control" value=<?= data[19] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-street-2" style="margin-bottom: 0rem" >Client Street Address 2</label>
+      <input type="text" id="client-street-2" class="form-control" value=<?= data[20] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-city" style="margin-bottom: 0rem" >Client City</label>
+      <input type="text" id="client-city" class="form-control" value=<?= data[21] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-state" style="margin-bottom: 0rem" >Client State/Providence</label>
+      <input type="text" id="client-state" class="form-control" value=<?= data[22] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-zip" style="margin-bottom: 0rem" >Client ZIP</label>
+      <input type="text" id="client-zip" class="form-control" value=<?= data[23] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="insurance-provider" style="margin-bottom: 0rem" >Insurance Provider</label>
+      <input type="text" id="insurance-provider" class="form-control" value=<?= data[24] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="insurance-provider-phone" style="margin-bottom: 0rem" >Insurance Provider Phone</label>
+      <input type="text" id="insurance-provider-phone" class="form-control" value=<?= data[25] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="client-insurance-id" style="margin-bottom: 0rem" >Client Insurance ID</label>
+      <input type="text" id="client-insurance-id" class="form-control" value=<?= data[26] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-first-name" style="margin-bottom: 0rem" >Policy Holder First Name</label>
+      <input type="text" id="policy-holder-first-name" class="form-control" value=<?= data[27] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-last-name" style="margin-bottom: 0rem" >Policy Holder Last Name</label>
+      <input type="text" id="policy-holder-last-name" class="form-control" value=<?= data[28] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-dob" style="margin-bottom: 0rem" >Policy Holder DOB</label>
+      <input type="text" id="policy-holder-dob" class="form-control" value=<?= data[29] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-client-relation" style="margin-bottom: 0rem" >Policy Holder relation to Client</label>
+      <input type="text" id="policy-holder-client-relation" class="form-control" value=<?= data[30] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-street" style="margin-bottom: 0rem" >Policy Holder Street Address</label>
+      <input type="text" id="policy-holder-street" class="form-control" value=<?= data[31] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-street-2" style="margin-bottom: 0rem" >Policy Holder Street Address 2</label>
+      <input type="text" id="policy-holder-street-2" class="form-control" value=<?= data[32] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-city" style="margin-bottom: 0rem" >Policy Holder City</label>
+      <input type="text" id="policy-holder-city" class="form-control" value=<?= data[33] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-state" style="margin-bottom: 0rem" >Policy Holder State</label>
+      <input type="text" id="policy-holder-state" class="form-control" value=<?= data[34] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-holder-zip" style="margin-bottom: 0rem" >Policy Holder ZIP</label>
+      <input type="text" id="policy-holder-zip" class="form-control" value=<?= data[35] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-benefits" style="margin-bottom: 0rem" >Report Policy Benefits For</label>
+      <input type="text" id="policy-benefits" class="form-control" value=<?= data[36] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <label for="policy-benefit-type" style="margin-bottom: 0rem" >Type of Benefit</label>
+      <input type="text" id="policy-benefit-type" class="form-control" value=<?= data[37] ?> >
+      </div> 
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-6 narrow" >
+      <input type="button" value="Update Record" onclick="EditRecord()" class="btn btn-primary" />
+      </div> 
+      </div>
+    </form>
+  <div id="displayReturn" ></div>
+  </div>
+  <script>
+    LoadRecord(data);
+  </script>
+  </body>
+</html>

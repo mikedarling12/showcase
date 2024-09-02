@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+<style>
+.narrow
+{
+  margin-bottom: 0.5rem;
+}
+
+select#location-name option {
+  display: none;
+}
+
+select#location-name option#no-facility{
+  display: inline; 
+}
+
+</style>
+<script>
+function SubmitRecord()
+{
+  document.getElementById("displayReturn").innerHTML = "";
+  var facility_name_options = document.getElementById("facility-name").options;
+  var facility_name = facility_name_options[facility_name_options.selectedIndex].innerHTML;
+  if (facility_name == "-Select An Option-") {
+    facility_name = "";
+  }
+  var location_name = document.getElementById("location-name").value;
+  var date = document.getElementById("date").value;
+  var treatment_start_date = document.getElementById("treatment-start-date").value;
+  var old_client_new_insurance = document.getElementById("old-client-new-insurance").value;
+  var client_first_name = document.getElementById("client-first-name").value;
+  var client_last_name = document.getElementById("client-last-name").value;
+  var patient_dob = document.getElementById("patient-dob").value;
+  var second_insurance = document.getElementById("second-insurance").value;
+  var patient_phone = document.getElementById("patient-phone").value;
+  var client_ssn = document.getElementById("client-ssn").value;
+  var client_street = document.getElementById("client-street").value;
+  var client_street_2 = document.getElementById("client-street-2").value;
+  var client_city = document.getElementById("client-city").value;
+  var client_state = document.getElementById("client-state").value;
+  var client_zip = document.getElementById("client-zip").value;
+  var insurance_provider = document.getElementById("insurance-provider").value;
+  var insurance_provider_phone = document.getElementById("insurance-provider-phone").value;
+  var client_insurance_id = document.getElementById("client-insurance-id").value;
+  var policy_holder_first_name = document.getElementById("policy-holder-first-name").value;
+  var policy_holder_last_name = document.getElementById("policy-holder-last-name").value;
+  var policy_holder_dob = document.getElementById("policy-holder-dob").value;
+  var policy_holder_client_relation = document.getElementById("policy-holder-client-relation").value;
+  var policy_holder_street = document.getElementById("policy-holder-street").value;
+  var policy_holder_street_2 = document.getElementById("policy-holder-street-2").value;
+  var policy_holder_city = document.getElementById("policy-holder-city").value;
+  var policy_holder_state = document.getElementById("policy-holder-state").value;
+  var policy_holder_zip = document.getElementById("policy-holder-zip").value;
+  var policy_benefits = document.getElementById("policy-benefits").value;
+  var policy_benefit_type = document.getElementById("policy-benefit-type").value;
+  google.script.run.withSuccessHandler(closeForm).AddRecord(facility_name, location_name, date, treatment_start_date, old_client_new_insurance, "", "", "", client_first_name, client_last_name, patient_dob, second_insurance, patient_phone, client_ssn, client_street, client_street_2, client_city, client_state, client_zip, insurance_provider, insurance_provider_phone, client_insurance_id, policy_holder_first_name, policy_holder_last_name, policy_holder_dob, policy_holder_client_relation, policy_holder_street, policy_holder_street_2, policy_holder_city, policy_holder_state, policy_holder_zip, policy_benefits, policy_benefit_type);
+}
+
+function closeForm()
+{
+  google.script.host.close();
+}
+
+</script>
+  </head>
+  <body>
+  <form>
+  <div style="padding: 10px" >
+  <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <input type="button" value="Submit" onclick="SubmitRecord()" class="btn btn-primary" />
+  </div> 
+  </div>
+  <div class="form-row" >
+  <div class="form-group col-md-6 narrow" >
+  <label for="facility-name" style="margin-bottom: 0rem" >Facility Name</label>
+  <select id="facility-name" class="form-control" onChange="LoadLocations()">
+    <option value="no-selection">-Select An Option-</option>
+    <? var companies = GetInsuranceCompanies(); ?>
+    <? companies.forEach(function(value) { ?><option value="yes-selection"><?= value ?></option> <? }); ?>
+  </select>
+  </div> 
+  </div>
+  <div class="form-row" >
+  <div class="form-group col-md-6 narrow" >
+  <label for="location-name" style="margin-bottom: 0rem" >Location Name</label>
+  <select id="location-name" class="form-control">
+    <option value="" id="no-facility">-Select A Facility First-</option>
+    <option value="" id="yes-facility">-Select An Option-</option>
+    <? var facilities = GetFacilities(); ?>
+    <? for (let [key, value] of facilities) { ?><option id="<?= value ?>"><?= key ?></option> <? }; ?>
+  </select>
+  </div> 
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="date" style="margin-bottom: 0rem" >Date</label>
+  <input type="text" id="date" value=<?= getNowButFormatted() ?> class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="treatment-start-date" style="margin-bottom: 0rem" >Treatment Start Date</label>
+  <input type="text" id="treatment-start-date" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="old-client-new-insurance" style="margin-bottom: 0rem" >Existing Client with New Insurance?</label>
+  <input type="text" id="old-client-new-insurance" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-first-name" style="margin-bottom: 0rem" >Client First Name</label>
+  <input type="text" id="client-first-name" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-last-name" style="margin-bottom: 0rem" >Client Last Name</label>
+  <input type="text" id="client-last-name" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="patient-dob" style="margin-bottom: 0rem" >Patient DOB</label>
+  <input type="text" id="patient-dob" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="second-insurance" style="margin-bottom: 0rem" >Secondary Insurance or additional notes</label>
+  <input type="text" id="second-insurance" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="patient-phone" style="margin-bottom: 0rem" >Patient Phone Number</label>
+  <input type="text" id="patient-phone" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-ssn" style="margin-bottom: 0rem" >Client Last 4 of SSN</label>
+  <input type="text" id="client-ssn" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-street" style="margin-bottom: 0rem" >Client Street Address</label>
+  <input type="text" id="client-street" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-street-2" style="margin-bottom: 0rem" >Client Street Address 2</label>
+  <input type="text" id="client-street-2" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-city" style="margin-bottom: 0rem" >Client City</label>
+  <input type="text" id="client-city" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-state" style="margin-bottom: 0rem" >Client State/Providence</label>
+  <input type="text" id="client-state" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-zip" style="margin-bottom: 0rem" >Client ZIP</label>
+  <input type="text" id="client-zip" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="insurance-provider" style="margin-bottom: 0rem" >Insurance Provider</label>
+  <input type="text" id="insurance-provider" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="insurance-provider-phone" style="margin-bottom: 0rem" >Insurance Provider Phone</label>
+  <input type="text" id="insurance-provider-phone" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="client-insurance-id" style="margin-bottom: 0rem" >Client Insurance ID</label>
+  <input type="text" id="client-insurance-id" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-first-name" style="margin-bottom: 0rem" >Policy Holder First Name</label>
+  <input type="text" id="policy-holder-first-name" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-last-name" style="margin-bottom: 0rem" >Policy Holder Last Name</label>
+  <input type="text" id="policy-holder-last-name" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-dob" style="margin-bottom: 0rem" >Policy Holder DOB</label>
+  <input type="text" id="policy-holder-dob" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-client-relation" style="margin-bottom: 0rem" >Policy Holder relation to Client</label>
+  <input type="text" id="policy-holder-client-relation" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-street" style="margin-bottom: 0rem" >Policy Holder Street Address</label>
+  <input type="text" id="policy-holder-street" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-street-2" style="margin-bottom: 0rem" >Policy Holder Street Address 2</label>
+  <input type="text" id="policy-holder-street-2" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-city" style="margin-bottom: 0rem" >Policy Holder City</label>
+  <input type="text" id="policy-holder-city" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-state" style="margin-bottom: 0rem" >Policy Holder State</label>
+  <input type="text" id="policy-holder-state" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-holder-zip" style="margin-bottom: 0rem" >Policy Holder ZIP</label>
+  <input type="text" id="policy-holder-zip" class="form-control" />
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-benefits" style="margin-bottom: 0rem" >Report Policy Benefits For</label>
+  <select id="policy-benefits" class="form-control">
+    <option value="">-Select An Option-</option>
+    <option value="Substance Abuse">Substance Abuse</option>
+    <option value="Mental Health">Mental Health</option>
+    <option value="Both">Both</option>
+  </select>
+  </div> 
+  </div>
+   <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <label for="policy-benefit-type" style="margin-bottom: 0rem" >Type of Benefit</label>
+  <select id="policy-benefit-type" class="form-control">
+    <option value="">-Select An Option-</option>
+    <option value="In Network">In Network</option>
+    <option value="Out of Network">Out of Network</option>
+  </div> 
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6 narrow" >
+  <input type="button" value="Submit" onclick="SubmitRecord()" class="btn btn-primary" />
+  </div> 
+  </div>
+  </form>
+  <div id="displayReturn" ></div>
+  </div>
+  <script>
+
+    function LoadLocations() {
+
+      //var possibleOptions = document.getElementById("facility-name").options;
+      //var selectedValue = possibleOptions[possibleOptions.selectedIndex];
+      var selectedOption = document.getElementById("facility-name");
+      var selectedValue = selectedOption.value;
+
+      // Get the company value.
+      var text = selectedOption.options[selectedOption.selectedIndex].text;
+
+      // Hide all the options.
+      var locationOptions = document.getElementById("location-name").options;
+
+      // If there is no selected value, then a company was selected, so update it.
+      if (selectedValue == "yes-selection") {
+
+        for (i = 0; i < locationOptions.length; i++) {
+          var option = locationOptions[i];
+          if (option.id == "yes-facility") {
+            option.style.display = "inline";
+          } else if (option.id == text) {
+            option.style.display = "inline";
+          } else {
+            option.style.display = "none";
+          }
+        }
+
+        // Set the default value for the dropdown.
+        var $option = document.querySelector('#yes-facility');
+        $option.selected = true;
+
+      } else if (selectedValue == "no-selection") {
+
+        for (i = 0; i < locationOptions.length; i++) {
+          var option = locationOptions[i];
+          if (option.id == "no-facility") {
+            option.style.display = "inline";
+          } else {
+            option.style.display = "none";
+          }
+        }
+
+        // Set the default value for the dropdown.
+        var $option = document.querySelector('#no-facility');
+        $option.selected = true;
+      }
+    }
+
+  </script>
+  </body>
+</html>

@@ -5,20 +5,32 @@ function testTime() {
 
   // Get the spreadsheets with the necessary information.
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var infoSheet = ss.getActiveSheet();
-  
+  var infoSheet = ss.getSheetByName("VOB Current Month");
+
   // Get the time that the report was run.
   var startTimeCol = getCol(infoSheet.getName(), "Start Time");
-  var startTimePreFormat = new Date(infoSheet.getRange(clientRow, startTimeCol).getValue());
+  var startTimePreFormat = new Date(
+    infoSheet.getRange(clientRow, startTimeCol).getValue()
+  );
   var startTimeZone = startTimePreFormat.getTimezoneOffset();
   //ui.alert(startTimeZone);
-  var startTime = Utilities.formatDate(startTimePreFormat, timeZone-7, 'h:mm aaa');
+  var startTime = Utilities.formatDate(
+    startTimePreFormat,
+    timeZone - 7,
+    "h:mm aaa"
+  );
 
   ui.alert(startTime);
 
   var startTimeCol = getCol(infoSheet.getName(), "Start Time");
-  var startTimePreFormat = new Date(infoSheet.getRange(clientRow, startTimeCol).getValue());
-  var startTime = Utilities.formatDate(startTimePreFormat, timeZone-7, 'h:mm aaa');
+  var startTimePreFormat = new Date(
+    infoSheet.getRange(clientRow, startTimeCol).getValue()
+  );
+  var startTime = Utilities.formatDate(
+    startTimePreFormat,
+    timeZone - 7,
+    "h:mm aaa"
+  );
 
   ui.alert(startTime);
 
@@ -32,4 +44,12 @@ function testTime() {
   //ui.alert(date);
   //ui.alert(Session.getScriptTimeZone());
   //ui.alert(SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone());
+}
+
+function formatTesting() {
+  var startTimePreFormat = new Date(getNowButFormatted());
+  //var startTimePreFormat = new Date(ssSheet.getRange(clientRow, startTimeCol).getValue());
+  var startDate = Utilities.formatDate(startTimePreFormat, "MST", "M/d/yyyy");
+  console.log(startTimePreFormat);
+  console.log(startDate);
 }
