@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button {
+    height: 42px;
+    width: 42px;
+    font-size: 1.5em;
+}
+
+.player {
+    font-weight: bold;
+}
+
+.notSelected {
+    background-color: #ddd;
+    color: #888;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.mark-button {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.red.marked {
+    background-color: white;
+    color: red;
+}
+
+.yellow.marked {
+    background-color: #333;
+    color: yellow;
+}
+
+.green.marked {
+    background-color: white;
+    color: green;
+}
+
+.blue.marked {
+    background-color: white;
+    color: blue;
+}

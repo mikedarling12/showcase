@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quixx Scoreboard - Single Player</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+</head>
+<body>
+
+<h1>Quixx Scoreboard - Single Player</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <td class="red player">Red</td>
+            <td id="red2" class="notSelected"><button class="red mark-button" onclick="toggleCell('red2')">2</button></td>
+            <td id="red3" class="notSelected"><button class="red mark-button" onclick="toggleCell('red3')">3</button></td>
+            <td id="red4" class="notSelected"><button class="red mark-button" onclick="toggleCell('red4')">4</button></td>
+            <td id="red5" class="notSelected"><button class="red mark-button" onclick="toggleCell('red5')">5</button></td>
+            <td id="red6" class="notSelected"><button class="red mark-button" onclick="toggleCell('red6')">6</button></td>
+            <td id="red7" class="notSelected"><button class="red mark-button" onclick="toggleCell('red7')">7</button></td>
+            <td id="red8" class="notSelected"><button class="red mark-button" onclick="toggleCell('red8')">8</button></td>
+            <td id="red9" class="notSelected"><button class="red mark-button" onclick="toggleCell('red9')">9</button></td>
+            <td id="red10" class="notSelected"><button class="red mark-button" onclick="toggleCell('red10')">10</button></td>
+            <td id="red11" class="notSelected"><button class="red mark-button" onclick="toggleCell('red11')">11</button></td>
+            <td id="red12" class="notSelected"><button class="red mark-button" onclick="toggleCell('red12')">12</button></td>
+            <td id="red13" class="notSelected"><button class="red mark-button" onclick="toggleCell('red13')">⚿</button></td>
+        </tr>
+        <tr>
+            <td class="yellow player">Yellow</td>
+            <td id="yellow2" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow2')">2</button></td>
+            <td id="yellow3" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow3')">3</button></td>
+            <td id="yellow4" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow4')">4</button></td>
+            <td id="yellow5" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow5')">5</button></td>
+            <td id="yellow6" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow6')">6</button></td>
+            <td id="yellow7" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow7')">7</button></td>
+            <td id="yellow8" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow8')">8</button></td>
+            <td id="yellow9" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow9')">9</button></td>
+            <td id="yellow10" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow10')">10</button></td>
+            <td id="yellow11" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow11')">11</button></td>
+            <td id="yellow12" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow12')">12</button></td>
+            <td id="yellow13" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow13')">⚿</button></td>
+        </tr>
+        <tr>
+            <td class="green player">Green</td>
+            <td id="green12" class="notSelected"><button class="green mark-button" onclick="toggleCell('green12')">12</button></td>
+            <td id="green11" class="notSelected"><button class="green mark-button" onclick="toggleCell('green11')">11</button></td>
+            <td id="green10" class="notSelected"><button class="green mark-button" onclick="toggleCell('green10')">10</button></td>
+            <td id="green9" class="notSelected"><button class="green mark-button" onclick="toggleCell('green9')">9</button></td>
+            <td id="green8" class="notSelected"><button class="green mark-button" onclick="toggleCell('green8')">8</button></td>
+            <td id="green7" class="notSelected"><button class="green mark-button" onclick="toggleCell('green7')">7</button></td>
+            <td id="green6" class="notSelected"><button class="green mark-button" onclick="toggleCell('green6')">6</button></td>
+            <td id="green5" class="notSelected"><button class="green mark-button" onclick="toggleCell('green5')">5</button></td>
+            <td id="green4" class="notSelected"><button class="green mark-button" onclick="toggleCell('green4')">4</button></td>
+            <td id="green3" class="notSelected"><button class="green mark-button" onclick="toggleCell('green3')">3</button></td>
+            <td id="green2" class="notSelected"><button class="green mark-button" onclick="toggleCell('green2')">2</button></td>
+            <td id="green13" class="notSelected"><button class="green mark-button" onclick="toggleCell('green13')">⚿</button></td>
+        </tr>
+        <tr>
+            <td class="blue player">Blue</td>
+            <td id="blue12" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue12')">12</button></td>
+            <td id="blue11" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue11')">11</button></td>
+            <td id="blue10" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue10')">10</button></td>
+            <td id="blue9" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue9')">9</button></td>
+            <td id="blue8" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue8')">8</button></td>
+            <td id="blue7" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue7')">7</button></td>
+            <td id="blue6" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue6')">6</button></td>
+            <td id="blue5" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue5')">5</button></td>
+            <td id="blue4" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue4')">4</button></td>
+            <td id="blue3" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue3')">3</button></td>
+            <td id="blue2" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue2')">2</button></td>
+            <td id="blue13" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue13')">⚿</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <tr>
+        <th class="red">Red</th>
+        <th class="yellow">Yellow</th>
+        <th class="green">Green</th>
+        <th class="blue">Blue</th>
+        <th>Overall</th>
+    </tr>
+    <tr>
+        <td id="redTotal" class="red">0</td>
+        <td id="yellowTotal" class="yellow">0</td>
+        <td id="greenTotal" class="green">0</td>
+        <td id="blueTotal" class="blue">0</td>
+        <td id="overallTotal">0</td>
+    </tr>
+</table>
+
+<script src="scripts/cellToggle.js"></script>
+
+<p>Click on the numbers to mark them as crossed.</p>
+
+</body>
+</html>
