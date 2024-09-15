@@ -19,7 +19,7 @@ th {
     background-color: #f2f2f2;
 }
 
-button {
+button.mark-button {
     height: 42px;
     width: 42px;
     font-size: 1.5em;
@@ -32,6 +32,10 @@ button {
 .notSelected {
     background-color: #ddd;
     color: #888;
+}
+
+.lockArea {
+    background-color: darkgrey;
 }
 
 .red {
@@ -76,4 +80,8 @@ button {
 .blue.marked {
     background-color: white;
     color: blue;
+}
+
+.clickable {
+    background-color: aquamarine;
 }

@@ -24,8 +24,8 @@
             <td id="red9" class="notSelected"><button class="red mark-button" onclick="toggleCell('red9')">9</button></td>
             <td id="red10" class="notSelected"><button class="red mark-button" onclick="toggleCell('red10')">10</button></td>
             <td id="red11" class="notSelected"><button class="red mark-button" onclick="toggleCell('red11')">11</button></td>
-            <td id="red12" class="notSelected"><button class="red mark-button" onclick="toggleCell('red12')">12</button></td>
-            <td id="red13" class="notSelected"><button class="red mark-button" onclick="toggleCell('red13')">⚿</button></td>
+            <td id="red12" class="notSelected lockArea"><button class="red mark-button" onclick="toggleCell('red12')">12</button></td>
+            <td id="red13" class="notSelected lockArea"><button class="red mark-button" onclick="toggleCell('red13')">⚿</button></td>
         </tr>
         <tr>
             <td class="yellow player">Yellow</td>
@@ -39,8 +39,8 @@
             <td id="yellow9" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow9')">9</button></td>
             <td id="yellow10" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow10')">10</button></td>
             <td id="yellow11" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow11')">11</button></td>
-            <td id="yellow12" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow12')">12</button></td>
-            <td id="yellow13" class="notSelected"><button class="yellow mark-button" onclick="toggleCell('yellow13')">⚿</button></td>
+            <td id="yellow12" class="notSelected lockArea"><button class="yellow mark-button" onclick="toggleCell('yellow12')">12</button></td>
+            <td id="yellow13" class="notSelected lockArea"><button class="yellow mark-button" onclick="toggleCell('yellow13')">⚿</button></td>
         </tr>
         <tr>
             <td class="green player">Green</td>
@@ -54,8 +54,8 @@
             <td id="green5" class="notSelected"><button class="green mark-button" onclick="toggleCell('green5')">5</button></td>
             <td id="green4" class="notSelected"><button class="green mark-button" onclick="toggleCell('green4')">4</button></td>
             <td id="green3" class="notSelected"><button class="green mark-button" onclick="toggleCell('green3')">3</button></td>
-            <td id="green2" class="notSelected"><button class="green mark-button" onclick="toggleCell('green2')">2</button></td>
-            <td id="green13" class="notSelected"><button class="green mark-button" onclick="toggleCell('green13')">⚿</button></td>
+            <td id="green2" class="notSelected lockArea"><button class="green mark-button" onclick="toggleCell('green2')">2</button></td>
+            <td id="green13" class="notSelected lockArea"><button class="green mark-button" onclick="toggleCell('green13')">⚿</button></td>
         </tr>
         <tr>
             <td class="blue player">Blue</td>
@@ -69,13 +69,29 @@
             <td id="blue5" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue5')">5</button></td>
             <td id="blue4" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue4')">4</button></td>
             <td id="blue3" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue3')">3</button></td>
-            <td id="blue2" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue2')">2</button></td>
-            <td id="blue13" class="notSelected"><button class="blue mark-button" onclick="toggleCell('blue13')">⚿</button></td>
+            <td id="blue2" class="notSelected lockArea"><button class="blue mark-button" onclick="toggleCell('blue2')">2</button></td>
+            <td id="blue13" class="notSelected lockArea"><button class="blue mark-button" onclick="toggleCell('blue13')">⚿</button></td>
         </tr>
     </tbody>
 </table>
 
 <table>
+    <thead>
+        <th colspan="5">Penalties</th>
+    </thead>
+    <tr>
+        <td class="penalty"><input type="checkbox" name="penalty1" id="penalty1" onchange="updateOverallTotal()"></td>
+        <td class="penalty"><input type="checkbox" name="penalty2" id="penalty2" onchange="updateOverallTotal()"></td>
+        <td class="penalty"><input type="checkbox" name="penalty3" id="penalty3" onchange="updateOverallTotal()"></td>
+        <td class="penalty"><input type="checkbox" name="penalty4" id="penalty4" onchange="updateOverallTotal()"></td>
+        <td class="penalty"><input type="checkbox" name="penalty5" id="penalty5" onchange="updateOverallTotal()"></td>
+    </tr>
+</table>
+
+<table>
+    <thead>
+        <th colspan="5">Total Points</th>
+    </thead>
     <tr>
         <th class="red">Red</th>
         <th class="yellow">Yellow</th>
@@ -91,8 +107,26 @@
         <td id="overallTotal">0</td>
     </tr>
 </table>
+<table>
+    <thead>
+        <th colspan="6">Die Rolls</th>
+    </thead>
+    <tr>
+        <td id="whiteDice1">0</td>
+        <td id="whiteDice2">0</td>
+        <td class="red" id="redDice">0</td>
+        <td class="yellow" id="yellowDice">0</td>
+        <td class="green" id="greenDice">0</td>
+        <td class="blue" id="blueDice">0</td>
+    </tr>
+</table>
+
+<button onclick="rollDice()">Roll the dice!</button>
+<button onclick="lockIn()">Lock-In!</button>
+<button onclick="setDiceEnd()">Score Out!</button>
 
 <script src="scripts/cellToggle.js"></script>
+<script src="scripts/dice.js"></script>
 
 <p>Click on the numbers to mark them as crossed.</p>
 
