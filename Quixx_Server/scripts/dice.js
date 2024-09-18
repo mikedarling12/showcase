@@ -17,7 +17,7 @@ function rollDice() {
     markAllAvailableCells([parseInt(whiteDice1.textContent), parseInt(whiteDice2.textContent), 
                         parseInt(redDice.textContent), parseInt(yellowDice.textContent), 
                         parseInt(greenDice.textContent), parseInt(blueDice.textContent)]);
-    coloredDicePickAvailable = true;
+    cellsPicked = 0;
 }
 
 function markAllAvailableCells(diceResults) {
@@ -58,4 +58,5 @@ function setDiceEnd() {
     markAllAvailableCells([parseInt(whiteDice1.textContent), parseInt(whiteDice2.textContent), 
         parseInt(redDice.textContent), parseInt(yellowDice.textContent), 
         parseInt(greenDice.textContent), parseInt(blueDice.textContent)]);
+    cellsPicked = 0;
 }

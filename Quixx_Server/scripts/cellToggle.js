@@ -1,23 +1,26 @@
-let coloredDicePickAvailable = false;
-let genericDicePickAvailable = false;
+let cellsPicked = 0; // current max is 1, but once the generic die result is working, this will be two.
 
 function toggleCell(id) {
     var cell = document.getElementById(id);
-    if (cell.classList.contains('notSelected') && cell.classList.contains("clickable") && coloredDicePickAvailable) {
+    if (cellCanBeSelected(id)) {
         cell.classList.remove('notSelected');
         cell.classList.add('selected');
         cell.querySelector('.mark-button').classList.add('marked');
         let color = cell.querySelector('.mark-button').classList[0];
-        // if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
-        //     console.log("Selecting " + color + 13);
-        //     document.getElementById(color + 13).classList.add('marked');
-        // }
-        // if (cell.textContent == 2 && (color == "blue" || color == "green")) {
-        //     console.log("Selecting " + color + 13);
-        //     document.getElementById(color + 13).classList.add('marked');
-        // }
+        if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
+            let lockCell = document.getElementById(color + 13);
+            lockCell.classList.remove('notSelected');
+            lockCell.classList.add('selected');
+            lockCell.querySelector('.mark-button').classList.add('marked');
+        }
+        if (cell.textContent == 2 && (color == "blue" || color == "green")) {
+            let lockCell = document.getElementById(color + 13);
+            lockCell.classList.remove('notSelected');
+            lockCell.classList.add('selected');
+            lockCell.querySelector('.mark-button').classList.add('marked');
+        }
         updateTotal(color);
-        coloredDicePickAvailable = false;
+        cellsPicked++;
         // removeAvailabilityFromCells();
     }
     else if (cell.classList.contains('selected') && cell.classList.contains("clickable")) {
@@ -26,8 +29,16 @@ function toggleCell(id) {
         cell.querySelector('.mark-button').classList.remove('marked');
         let color = cell.querySelector('.mark-button').classList[0];
         updateTotal(color);
-        coloredDicePickAvailable = true;
+        cellsPicked--;
     }
+}
+
+function cellCanBeSelected(id) {
+    let cell = document.getElementById(id);
+    if (cell.classList.contains('notSelected') && cell.classList.contains("clickable") && isValidCell(id)) {
+        return true;
+    }
+    return false;
 }
 
 function countSelectedCellsInRow(color) {
@@ -85,13 +96,13 @@ function cellStillPossible(id, color) {
         return false;
     }
     var prospectiveCellValue = parseInt(document.getElementById(id).textContent);
-    console.log(color);
-    console.log(prospectiveCellValue);
+    //console.log(color);
+    //console.log(prospectiveCellValue);
 
     // Based on which color the prospective cell is, check for any cell that would block the cell from being selected.
     if (color == "red" || color == "yellow") {
         for (let valueToCheck = prospectiveCellValue + 1; valueToCheck < 12; valueToCheck++) {
-            console.log(document.getElementById(color + valueToCheck));
+            //console.log(document.getElementById(color + valueToCheck));
             if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
                 return false;
             }
@@ -101,7 +112,7 @@ function cellStillPossible(id, color) {
         }
     } else if (color == "blue" || color == "green") {
         for (let valueToCheck = prospectiveCellValue - 1; valueToCheck > 3; valueToCheck--) {
-            console.log(document.getElementById(color + valueToCheck));
+            //console.log(document.getElementById(color + valueToCheck));
             if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
                 return false;
             }
@@ -122,7 +133,29 @@ function removeAvailabilityFromCells() {
 }
 
 function lockIn() {
+    if (cellsPicked == 0) {
+        markPenalty();
+    }
     removeAvailabilityFromCells();
-    coloredDicePickAvailable = false;
-    genericDicePickAvailable = false;
+    cellsPicked = 0;
+}
+
+function markPenalty() {
+    for (let i = 0; i < 6; i++) {
+        let penaltyCheckbox = document.querySelector("#penalty" + (i + 1));
+        if (!penaltyCheckbox.checked) {
+            penaltyCheckbox.checked = true;
+            console.log("Penalty Marked");
+            return;
+        }
+    }
+    return;
+}
+
+function isValidCell(id) {
+    console.log(cellsPicked);
+    if (cellsPicked >= 1) {
+        return false;
+    }
+    return true;
 }
