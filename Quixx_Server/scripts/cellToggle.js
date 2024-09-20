@@ -1,30 +1,32 @@
 let cellsPicked = 0; // current max is 1, but once the generic die result is working, this will be two.
+let selectedGeneric = "selectedGeneric";
+let selectedColor = "selectedColor";
 
 function toggleCell(id) {
     var cell = document.getElementById(id);
     if (cellCanBeSelected(id)) {
         cell.classList.remove('notSelected');
-        cell.classList.add('selected');
+        cell.classList.add(selectedColor);
         cell.querySelector('.mark-button').classList.add('marked');
         let color = cell.querySelector('.mark-button').classList[0];
         if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
             let lockCell = document.getElementById(color + 13);
             lockCell.classList.remove('notSelected');
-            lockCell.classList.add('selected');
+            lockCell.classList.add(selectedColor);
             lockCell.querySelector('.mark-button').classList.add('marked');
         }
         if (cell.textContent == 2 && (color == "blue" || color == "green")) {
             let lockCell = document.getElementById(color + 13);
             lockCell.classList.remove('notSelected');
-            lockCell.classList.add('selected');
+            lockCell.classList.add(selectedColor);
             lockCell.querySelector('.mark-button').classList.add('marked');
         }
         updateTotal(color);
         cellsPicked++;
         // removeAvailabilityFromCells();
     }
-    else if (cell.classList.contains('selected') && cell.classList.contains("clickable")) {
-        cell.classList.remove('selected');
+    else if (cell.classList.contains(selectedColor) && cell.classList.contains("clickable")) {
+        cell.classList.remove(selectedColor);
         cell.classList.add('notSelected');
         cell.querySelector('.mark-button').classList.remove('marked');
         let color = cell.querySelector('.mark-button').classList[0];
@@ -92,7 +94,7 @@ function markCell(id, color) {
 }
 
 function cellStillPossible(id, color) {
-    if (document.getElementById(id).classList.contains("clickable") || document.getElementById(id).classList.contains("selected")) {
+    if (document.getElementById(id).classList.contains("clickable") || document.getElementById(id).classList.contains(selectedColor)) {
         return false;
     }
     var prospectiveCellValue = parseInt(document.getElementById(id).textContent);
@@ -103,7 +105,7 @@ function cellStillPossible(id, color) {
     if (color == "red" || color == "yellow") {
         for (let valueToCheck = prospectiveCellValue + 1; valueToCheck < 12; valueToCheck++) {
             //console.log(document.getElementById(color + valueToCheck));
-            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
+            if (document.getElementById(color + valueToCheck).classList.contains(selectedColor)) {
                 return false;
             }
         }
@@ -113,7 +115,7 @@ function cellStillPossible(id, color) {
     } else if (color == "blue" || color == "green") {
         for (let valueToCheck = prospectiveCellValue - 1; valueToCheck > 3; valueToCheck--) {
             //console.log(document.getElementById(color + valueToCheck));
-            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
+            if (document.getElementById(color + valueToCheck).classList.contains(selectedColor)) {
                 return false;
             }
         }
@@ -125,10 +127,21 @@ function cellStillPossible(id, color) {
 }
 
 function removeAvailabilityFromCells() {
-    var markedElements = document.querySelectorAll(".clickable");
+    removeClassFromClassList("clickable");
+    removeClassFromClassList(selectedGeneric);
+    removeClassFromClassList(selectedColor);
+    // var markedElements = document.querySelectorAll(".clickable");
+    // var totalElements = markedElements.length;
+    // for (let i = 0; i < totalElements; i++) {
+    //     markedElements[i].classList.remove('clickable');   
+    // }
+}
+
+function removeClassFromClassList(className) {
+    var markedElements = document.querySelectorAll("." + className);
     var totalElements = markedElements.length;
     for (let i = 0; i < totalElements; i++) {
-        markedElements[i].classList.remove('clickable');   
+        markedElements[i].classList.remove(className);   
     }
 }
 
@@ -153,9 +166,33 @@ function markPenalty() {
 }
 
 function isValidCell(id) {
+    var prospectiveCell = document.getElementById(id);
+    var genericCell = document.querySelectorAll(".selectedGeneric");
+    var colorCell = document.querySelectorAll(".selectedColor");
+    console.log(genericCell.length);
+    console.log(colorCell.length);
     console.log(cellsPicked);
-    if (cellsPicked >= 1) {
-        return false;
+    if (cellsPicked < 2) {
+
+        // If the first cell selected was an option for both the generic and color cell, the next one doesn't matter.
+        if (cellsPicked == 1 && genericCell.length == 1 && colorCell.length == 1) {
+            console.log("Outcome 1");
+            return true;
+
+        // If you are selecting a cell using an option you already have selected, that doesn't work.
+        } else if (prospectiveCell.classList.contains(selectedGeneric) && colorCell.length == 1) {
+            console.log("Outcome 2");
+            return true;
+        } else if (prospectiveCell.classList.contains(colorCell) && genericCell.length == 1) {
+            console.log("Outcome 3");
+            return true;
+
+        // Otherwise, that variety of cell is not already taken.
+        } else if (genericCell.length == 0 && colorCell.length == 0) {
+            console.log("Outcome 4");
+            return true;
+        }
+        console.log("Outcome 5")
     }
-    return true;
+    return false;
 }
