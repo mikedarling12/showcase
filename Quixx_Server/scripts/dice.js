@@ -22,11 +22,15 @@ function rollDice() {
 
 function markAllAvailableCells(diceResults) {
     for (let generic_dice_i = 0; generic_dice_i < 2; generic_dice_i++) {
-        markCell(getAvailableCellID("red", diceResults[generic_dice_i], diceResults[2]), "red");
-        markCell(getAvailableCellID("yellow", diceResults[generic_dice_i], diceResults[3]), "yellow");
-        markCell(getAvailableCellID("green", diceResults[generic_dice_i], diceResults[4]), "green");
-        markCell(getAvailableCellID("blue", diceResults[generic_dice_i], diceResults[5]), "blue");
+        markCell(getAvailableCellID("red", diceResults[generic_dice_i], diceResults[2]), "red", "colored");
+        markCell(getAvailableCellID("yellow", diceResults[generic_dice_i], diceResults[3]), "yellow", "colored");
+        markCell(getAvailableCellID("green", diceResults[generic_dice_i], diceResults[4]), "green", "colored");
+        markCell(getAvailableCellID("blue", diceResults[generic_dice_i], diceResults[5]), "blue", "colored");
     }
+    markCell(getAvailableCellID("red", diceResults[0], diceResults[1]), "red", "generic");
+    markCell(getAvailableCellID("yellow", diceResults[0], diceResults[1]), "yellow", "generic");
+    markCell(getAvailableCellID("green", diceResults[0], diceResults[1]), "green", "generic");
+    markCell(getAvailableCellID("blue", diceResults[0], diceResults[1]), "blue", "generic");
 }
 
 function getAvailableCellID(color, die1, die2) {

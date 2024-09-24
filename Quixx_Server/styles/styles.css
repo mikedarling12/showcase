@@ -82,6 +82,7 @@ button.mark-button {
     color: blue;
 }
 
-.clickable {
+.clickableColor,
+.clickableGeneric {
     background-color: aquamarine;
 }

@@ -1,32 +1,50 @@
 let cellsPicked = 0; // current max is 1, but once the generic die result is working, this will be two.
 let selectedGeneric = "selectedGeneric";
 let selectedColor = "selectedColor";
+let clickableColor = "clickableColor";
+let clickableGeneric = "clickableGeneric";
 
 function toggleCell(id) {
     var cell = document.getElementById(id);
     if (cellCanBeSelected(id)) {
         cell.classList.remove('notSelected');
-        cell.classList.add(selectedColor);
+        if (cell.classList.contains(clickableColor)) {
+            cell.classList.add(selectedColor);
+        }
+        if (cell.classList.contains(clickableGeneric)) {
+            cell.classList.add(selectedGeneric);
+        }
         cell.querySelector('.mark-button').classList.add('marked');
+
+        // Click the lock button if at the end of the row.
         let color = cell.querySelector('.mark-button').classList[0];
         if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
             let lockCell = document.getElementById(color + 13);
             lockCell.classList.remove('notSelected');
-            lockCell.classList.add(selectedColor);
+            lockCell.classList.add("selected");
             lockCell.querySelector('.mark-button').classList.add('marked');
         }
         if (cell.textContent == 2 && (color == "blue" || color == "green")) {
             let lockCell = document.getElementById(color + 13);
             lockCell.classList.remove('notSelected');
-            lockCell.classList.add(selectedColor);
+            lockCell.classList.add("selected");
             lockCell.querySelector('.mark-button').classList.add('marked');
         }
         updateTotal(color);
         cellsPicked++;
         // removeAvailabilityFromCells();
     }
-    else if (cell.classList.contains(selectedColor) && cell.classList.contains("clickable")) {
+    else if (cell.classList.contains(selectedColor) && cell.classList.contains(clickableColor)) {
+        console.log("Decolor");
         cell.classList.remove(selectedColor);
+        cell.classList.add('notSelected');
+        cell.querySelector('.mark-button').classList.remove('marked');
+        let color = cell.querySelector('.mark-button').classList[0];
+        updateTotal(color);
+        cellsPicked--;
+    } else if (cell.classList.contains(selectedGeneric) && cell.classList.contains(clickableGeneric)) {
+        console.log("Degeneric");
+        cell.classList.remove(selectedGeneric);
         cell.classList.add('notSelected');
         cell.querySelector('.mark-button').classList.remove('marked');
         let color = cell.querySelector('.mark-button').classList[0];
@@ -37,7 +55,7 @@ function toggleCell(id) {
 
 function cellCanBeSelected(id) {
     let cell = document.getElementById(id);
-    if (cell.classList.contains('notSelected') && cell.classList.contains("clickable") && isValidCell(id)) {
+    if (cell.classList.contains('notSelected') && (cell.classList.contains(clickableColor) || cell.classList.contains(clickableGeneric)) && isValidCell(id)) {
         return true;
     }
     return false;
@@ -87,14 +105,18 @@ function updateOverallTotal() {
     document.getElementById('overallTotal').textContent = overallTotal;
 }
 
-function markCell(id, color) {
+function markCell(id, color, cellType) {
     if (cellStillPossible(id, color)) {
-        document.getElementById(id).classList.add("clickable");
+        if (cellType == "colored") {
+            document.getElementById(id).classList.add(clickableColor);
+        } else if (cellType == "generic") {
+            document.getElementById(id).classList.add(clickableGeneric);
+        }
     }
 }
 
 function cellStillPossible(id, color) {
-    if (document.getElementById(id).classList.contains("clickable") || document.getElementById(id).classList.contains(selectedColor)) {
+    if (document.getElementById(id).classList.contains("clickable") || document.getElementById(id).classList.contains(selectedColor)  || document.getElementById(id).classList.contains("selected")) {
         return false;
     }
     var prospectiveCellValue = parseInt(document.getElementById(id).textContent);
@@ -105,7 +127,7 @@ function cellStillPossible(id, color) {
     if (color == "red" || color == "yellow") {
         for (let valueToCheck = prospectiveCellValue + 1; valueToCheck < 12; valueToCheck++) {
             //console.log(document.getElementById(color + valueToCheck));
-            if (document.getElementById(color + valueToCheck).classList.contains(selectedColor)) {
+            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
                 return false;
             }
         }
@@ -115,7 +137,7 @@ function cellStillPossible(id, color) {
     } else if (color == "blue" || color == "green") {
         for (let valueToCheck = prospectiveCellValue - 1; valueToCheck > 3; valueToCheck--) {
             //console.log(document.getElementById(color + valueToCheck));
-            if (document.getElementById(color + valueToCheck).classList.contains(selectedColor)) {
+            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
                 return false;
             }
         }
@@ -127,7 +149,8 @@ function cellStillPossible(id, color) {
 }
 
 function removeAvailabilityFromCells() {
-    removeClassFromClassList("clickable");
+    removeClassFromClassList(clickableGeneric);
+    removeClassFromClassList(clickableColor);
     removeClassFromClassList(selectedGeneric);
     removeClassFromClassList(selectedColor);
     // var markedElements = document.querySelectorAll(".clickable");
@@ -148,6 +171,18 @@ function removeClassFromClassList(className) {
 function lockIn() {
     if (cellsPicked == 0) {
         markPenalty();
+    } else {
+        console.log("Locking in");
+        var cellSelectedColor = document.querySelectorAll("." + selectedColor);
+        var cellSelectedGeneric = document.querySelectorAll("." + selectedGeneric);
+        console.log(cellSelectedColor);
+        console.log(cellSelectedGeneric);
+        if (cellSelectedColor.length == 1) {
+            cellSelectedColor[0].classList.add("selected");
+        }
+        if (cellSelectedGeneric.length == 1) {
+            cellSelectedGeneric[0].classList.add("selected");
+        }
     }
     removeAvailabilityFromCells();
     cellsPicked = 0;
@@ -159,6 +194,7 @@ function markPenalty() {
         if (!penaltyCheckbox.checked) {
             penaltyCheckbox.checked = true;
             console.log("Penalty Marked");
+            updateOverallTotal();
             return;
         }
     }
@@ -175,24 +211,24 @@ function isValidCell(id) {
     if (cellsPicked < 2) {
 
         // If the first cell selected was an option for both the generic and color cell, the next one doesn't matter.
-        if (cellsPicked == 1 && genericCell.length == 1 && colorCell.length == 1) {
+        if (genericCell.length == colorCell.length) {
             console.log("Outcome 1");
             return true;
 
         // If you are selecting a cell using an option you already have selected, that doesn't work.
-        } else if (prospectiveCell.classList.contains(selectedGeneric) && colorCell.length == 1) {
+        } else if (prospectiveCell.classList.contains(clickableGeneric) && colorCell.length == 1) {
             console.log("Outcome 2");
             return true;
-        } else if (prospectiveCell.classList.contains(colorCell) && genericCell.length == 1) {
+        } else if (prospectiveCell.classList.contains(clickableColor) && genericCell.length == 1) {
             console.log("Outcome 3");
             return true;
-
-        // Otherwise, that variety of cell is not already taken.
-        } else if (genericCell.length == 0 && colorCell.length == 0) {
-            console.log("Outcome 4");
-            return true;
         }
-        console.log("Outcome 5")
+        // // Otherwise, that variety of cell is not already taken.
+        // } else if (genericCell.length == 0 && colorCell.length == 0) {
+        //     console.log("Outcome 4");
+        //     return true;
+        // }
+        console.log("Outcome 4")
     }
     return false;
 }
