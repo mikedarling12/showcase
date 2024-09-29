@@ -18,18 +18,7 @@ function toggleCell(id) {
 
         // Click the lock button if at the end of the row.
         let color = cell.querySelector('.mark-button').classList[0];
-        if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
-            let lockCell = document.getElementById(color + 13);
-            lockCell.classList.remove('notSelected');
-            lockCell.classList.add("selected");
-            lockCell.querySelector('.mark-button').classList.add('marked');
-        }
-        if (cell.textContent == 2 && (color == "blue" || color == "green")) {
-            let lockCell = document.getElementById(color + 13);
-            lockCell.classList.remove('notSelected');
-            lockCell.classList.add("selected");
-            lockCell.querySelector('.mark-button').classList.add('marked');
-        }
+        toggleLock(cell, color);
         updateTotal(color);
         cellsPicked++;
         // removeAvailabilityFromCells();
@@ -40,6 +29,7 @@ function toggleCell(id) {
         cell.classList.add('notSelected');
         cell.querySelector('.mark-button').classList.remove('marked');
         let color = cell.querySelector('.mark-button').classList[0];
+        toggleLock(cell, color);
         updateTotal(color);
         cellsPicked--;
     } else if (cell.classList.contains(selectedGeneric) && cell.classList.contains(clickableGeneric)) {
@@ -48,6 +38,7 @@ function toggleCell(id) {
         cell.classList.add('notSelected');
         cell.querySelector('.mark-button').classList.remove('marked');
         let color = cell.querySelector('.mark-button').classList[0];
+        toggleLock(cell, color);
         updateTotal(color);
         cellsPicked--;
     }
@@ -169,23 +160,26 @@ function removeClassFromClassList(className) {
 }
 
 function lockIn() {
-    if (cellsPicked == 0) {
-        markPenalty();
-    } else {
-        console.log("Locking in");
-        var cellSelectedColor = document.querySelectorAll("." + selectedColor);
-        var cellSelectedGeneric = document.querySelectorAll("." + selectedGeneric);
-        console.log(cellSelectedColor);
-        console.log(cellSelectedGeneric);
-        if (cellSelectedColor.length == 1) {
-            cellSelectedColor[0].classList.add("selected");
+    if (!canRoll) {
+        if (cellsPicked == 0) {
+            markPenalty();
+        } else {
+            console.log("Locking in");
+            var cellSelectedColor = document.querySelectorAll("." + selectedColor);
+            var cellSelectedGeneric = document.querySelectorAll("." + selectedGeneric);
+            console.log(cellSelectedColor);
+            console.log(cellSelectedGeneric);
+            if (cellSelectedColor.length == 1) {
+                cellSelectedColor[0].classList.add("selected");
+            }
+            if (cellSelectedGeneric.length == 1) {
+                cellSelectedGeneric[0].classList.add("selected");
+            }
         }
-        if (cellSelectedGeneric.length == 1) {
-            cellSelectedGeneric[0].classList.add("selected");
-        }
+        removeAvailabilityFromCells();
+        cellsPicked = 0;
+        canRoll = true;
     }
-    removeAvailabilityFromCells();
-    cellsPicked = 0;
 }
 
 function markPenalty() {
@@ -232,3 +226,34 @@ function isValidCell(id) {
     }
     return false;
 }
+
+function toggleLock(cell, color) {
+    if ((cell.textContent == 12 && (color == "red" || color == "yellow")) || cell.textContent == 2 && (color == "blue" || color == "green")) {
+        let lockCell = document.getElementById(color + 13);
+        if (lockCell.classList.contains("selected")) {
+            lockCell.classList.remove('selected');
+            lockCell.classList.add("notSelected");
+            lockCell.querySelector('.mark-button').classList.remove('marked');
+    
+        } else {
+            lockCell.classList.remove('notSelected');
+            lockCell.classList.add("selected");
+            lockCell.querySelector('.mark-button').classList.add('marked');
+        }
+    }
+}
+
+// if (cell.textContent == 12 && (color == "red" || color == "yellow")) {
+//     // let lockCell = document.getElementById(color + 13);
+//     // lockCell.classList.remove('notSelected');
+//     // lockCell.classList.add("selected");
+//     // lockCell.querySelector('.mark-button').classList.add('marked');
+//     toggleLock(color);
+// }
+// if (cell.textContent == 2 && (color == "blue" || color == "green")) {
+//     // let lockCell = document.getElementById(color + 13);
+//     // lockCell.classList.remove('notSelected');
+//     // lockCell.classList.add("selected");
+//     // lockCell.querySelector('.mark-button').classList.add('marked');
+//     toggleLock(color);
+// }

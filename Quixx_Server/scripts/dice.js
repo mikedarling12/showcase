@@ -1,23 +1,28 @@
+let canRoll = true;
+
 // This function will cause all available dice to reroll themselves, then update their visual values.
 function rollDice() {
-    removeAvailabilityFromCells();
-    var whiteDice1 = document.getElementById("whiteDice1");
-    var whiteDice2 = document.getElementById("whiteDice2");
-    var redDice = document.getElementById("redDice");
-    var yellowDice = document.getElementById("yellowDice");
-    var greenDice = document.getElementById("greenDice");
-    var blueDice = document.getElementById("blueDice");
-    whiteDice1.textContent = randomizeDice();
-    whiteDice2.textContent = randomizeDice();
-    redDice.textContent = randomizeDice();
-    yellowDice.textContent = randomizeDice();
-    greenDice.textContent = randomizeDice();
-    blueDice.textContent = randomizeDice();
-
-    markAllAvailableCells([parseInt(whiteDice1.textContent), parseInt(whiteDice2.textContent), 
-                        parseInt(redDice.textContent), parseInt(yellowDice.textContent), 
-                        parseInt(greenDice.textContent), parseInt(blueDice.textContent)]);
-    cellsPicked = 0;
+    if (canRoll) {
+        canRoll = false;
+        removeAvailabilityFromCells();
+        var whiteDice1 = document.getElementById("whiteDice1");
+        var whiteDice2 = document.getElementById("whiteDice2");
+        var redDice = document.getElementById("redDice");
+        var yellowDice = document.getElementById("yellowDice");
+        var greenDice = document.getElementById("greenDice");
+        var blueDice = document.getElementById("blueDice");
+        whiteDice1.textContent = randomizeDice();
+        whiteDice2.textContent = randomizeDice();
+        redDice.textContent = randomizeDice();
+        yellowDice.textContent = randomizeDice();
+        greenDice.textContent = randomizeDice();
+        blueDice.textContent = randomizeDice();
+    
+        markAllAvailableCells([parseInt(whiteDice1.textContent), parseInt(whiteDice2.textContent), 
+                            parseInt(redDice.textContent), parseInt(yellowDice.textContent), 
+                            parseInt(greenDice.textContent), parseInt(blueDice.textContent)]);
+        cellsPicked = 0;
+    }
 }
 
 function markAllAvailableCells(diceResults) {
@@ -46,6 +51,7 @@ function randomizeDice() {
 
 // This function will cause all available dice to reroll themselves, then update their visual values.
 function setDiceEnd() {
+    canRoll = false;
     var whiteDice1 = document.getElementById("whiteDice1");
     var whiteDice2 = document.getElementById("whiteDice2");
     var redDice = document.getElementById("redDice");
