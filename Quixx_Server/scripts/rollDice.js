@@ -4,7 +4,7 @@ let canRoll = true;
 function rollDice() {
     if (canRoll) {
         canRoll = false;
-        removeAvailabilityFromCells();
+        //removeAvailabilityFromCells();
         var whiteDice1 = document.getElementById("whiteDice1");
         var whiteDice2 = document.getElementById("whiteDice2");
         var redDice = document.getElementById("redDice");
@@ -23,6 +23,11 @@ function rollDice() {
                             parseInt(greenDice.textContent), parseInt(blueDice.textContent)]);
         cellsPicked = 0;
     }
+}
+
+// This function will roll a single die to determine its new value.
+function randomizeDice() {
+    return Math.floor(Math.random() * 6) + 1;
 }
 
 function markAllAvailableCells(diceResults) {
@@ -44,9 +49,58 @@ function getAvailableCellID(color, die1, die2) {
     return id;
 }
 
-// This function will roll a single die to determine its new value.
-function randomizeDice() {
-    return Math.floor(Math.random() * 6) + 1;
+function markCell(id, color, cellType) {
+    if (cellStillPossible(id, color)) {
+        if (cellType == "colored") {
+            document.getElementById(id).classList.add(clickableColor);
+        } else if (cellType == "generic") {
+            document.getElementById(id).classList.add(clickableGeneric);
+        }
+    }
+}
+
+function cellStillPossible(id, color) {
+    if (document.getElementById(id).classList.contains("clickable") || document.getElementById(id).classList.contains(selectedColor)  || document.getElementById(id).classList.contains("selected")) {
+        return false;
+    }
+    var prospectiveCellValue = parseInt(document.getElementById(id).textContent);
+    //console.log(color);
+    //console.log(prospectiveCellValue);
+
+    // Based on which color the prospective cell is, check for any cell that would block the cell from being selected.
+    if (color == "red" || color == "yellow") {
+        for (let valueToCheck = prospectiveCellValue + 1; valueToCheck < 12; valueToCheck++) {
+            //console.log(document.getElementById(color + valueToCheck));
+            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
+                return false;
+            }
+        }
+        if (prospectiveCellValue == 12 && countSelectedCellsInRow(color) < 5) {
+            return false;
+        }
+    } else if (color == "blue" || color == "green") {
+        for (let valueToCheck = prospectiveCellValue - 1; valueToCheck > 3; valueToCheck--) {
+            //console.log(document.getElementById(color + valueToCheck));
+            if (document.getElementById(color + valueToCheck).classList.contains("selected")) {
+                return false;
+            }
+        }
+        if (prospectiveCellValue == 2 && countSelectedCellsInRow(color) < 5) {
+            return false;
+        }
+    } else { console.log("There was an exception here.")}
+    return true;
+}
+
+function countSelectedCellsInRow(color) {
+    var total = 0;
+    for (var i = 2; i <= 13; i++) {
+        var cell = document.getElementById(color + i);
+        if (!cell.classList.contains('notSelected')) {
+            total += 1;
+        }
+    }
+    return total;
 }
 
 // This function will cause all available dice to reroll themselves, then update their visual values.
