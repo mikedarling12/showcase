@@ -23,9 +23,11 @@ function lockIn() {
 
 function markPenalty() {
     for (let i = 0; i < 6; i++) {
-        let penaltyCheckbox = document.querySelector("#penalty" + (i + 1));
-        if (!penaltyCheckbox.checked) {
-            penaltyCheckbox.checked = true;
+        let penaltyCell = document.getElementById("penalty" + (i + 1));
+        if (penaltyCell.classList.contains("notSelected")) {
+            penaltyCell.classList.remove("notSelected");
+            penaltyCell.classList.add("selected");
+            penaltyCell.querySelector('.mark-button').classList.add('marked');
             console.log("Penalty Marked");
             updateOverallTotal();
             return;

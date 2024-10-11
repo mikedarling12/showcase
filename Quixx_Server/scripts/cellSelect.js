@@ -126,7 +126,7 @@ function updateOverallTotal() {
 function calculatePenalties() {
     let totalPenalty = 0;
     for (let penalty_i = 1; penalty_i < 5; penalty_i++) {
-        if (document.getElementById("penalty" + penalty_i).checked) {
+        if (document.getElementById("penalty" + penalty_i).classList.contains("selected")) {
             totalPenalty += 5;
         }
     }
