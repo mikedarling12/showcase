@@ -122,7 +122,9 @@
 </table>
 
 <button onclick="rollDice()">Roll the dice!</button>
-<button onclick="applyOtherPlayerRole(6)">Other Player Rolled!</button>
+<label for="otherPlayerRoll">What someone else rolled:</label>
+<input type="text" id="otherPlayerRoll" name="otherPlayerRoll" />
+<button onclick="applyOtherPlayerRole()">Other Player Rolled!</button>
 <button onclick="lockIn()">Lock-In!</button>
 <!--<button onclick="setDiceEnd()">Score Out!</button>-->
 

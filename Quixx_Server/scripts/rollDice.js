@@ -31,7 +31,8 @@ function randomizeDice() {
     return Math.floor(Math.random() * 6) + 1;
 }
 
-function applyOtherPlayerRole(dieNum) {
+function applyOtherPlayerRole() {
+    let dieNum = document.getElementById("otherPlayerRoll").value;
     markCell("red"+dieNum, "red", "generic");
     markCell("yellow"+dieNum, "yellow", "generic");
     markCell("green"+dieNum, "green", "generic");
