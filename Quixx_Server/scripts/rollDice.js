@@ -1,4 +1,5 @@
 let canRoll = true;
+let penaltiesBypass = false;
 
 // This function will cause all available dice to reroll themselves, then update their visual values.
 function rollDice() {
@@ -28,6 +29,16 @@ function rollDice() {
 // This function will roll a single die to determine its new value.
 function randomizeDice() {
     return Math.floor(Math.random() * 6) + 1;
+}
+
+function applyOtherPlayerRole(dieNum) {
+    markCell("red"+dieNum, "red", "generic");
+    markCell("yellow"+dieNum, "yellow", "generic");
+    markCell("green"+dieNum, "green", "generic");
+    markCell("blue"+dieNum, "blue", "generic");
+    penaltiesBypass = true;
+    cellsPicked = 0;
+    canRoll = false;
 }
 
 function markAllAvailableCells(diceResults) {

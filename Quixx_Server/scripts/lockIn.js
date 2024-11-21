@@ -22,16 +22,20 @@ function lockIn() {
 }
 
 function markPenalty() {
-    for (let i = 0; i < 6; i++) {
-        let penaltyCell = document.getElementById("penalty" + (i + 1));
-        if (penaltyCell.classList.contains("notSelected")) {
-            penaltyCell.classList.remove("notSelected");
-            penaltyCell.classList.add("selected");
-            penaltyCell.querySelector('.mark-button').classList.add('marked');
-            console.log("Penalty Marked");
-            updateOverallTotal();
-            return;
+    if (!penaltiesBypass) {
+        for (let i = 0; i < 6; i++) {
+            let penaltyCell = document.getElementById("penalty" + (i + 1));
+            if (penaltyCell.classList.contains("notSelected")) {
+                penaltyCell.classList.remove("notSelected");
+                penaltyCell.classList.add("selected");
+                penaltyCell.querySelector('.mark-button').classList.add('marked');
+                console.log("Penalty Marked");
+                updateOverallTotal();
+                return;
+            }
         }
+    } else {
+        penaltiesBypass = false;
     }
     return;
 }
